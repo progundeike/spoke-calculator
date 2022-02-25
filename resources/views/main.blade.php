@@ -5,9 +5,8 @@
 @section('content')
 <div class="container-fluid">
 
-    {{Form::token()}}
     {{ Form::open(['url' => '/length', 'method' => 'post']) }}
-
+    @csrf
     @if ($errors->any())
         <div class="alert alert-danger mt-3">
             <ul>
