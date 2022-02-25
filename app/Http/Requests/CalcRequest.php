@@ -24,13 +24,13 @@ class CalcRequest extends FormRequest
     public function rules()
     {
         return [
-            'erd' => 'required|numeric|max:700',
-            'numberOfSpoke' => 'required|numeric|max:100',
-            'rimOffset' => 'required|numeric|max:100',
-            'pcdRight' => 'required|numeric|max:100',
-            'pcdLeft' => 'required|numeric|max:100',
-            'centerFlangeRight' => 'required|numeric|max:100',
-            'centerFlangeLeft' => 'required|numeric|max:100',
+            'erd' => 'required|numeric|min:100|max:900',
+            'numberOfSpoke' => 'required|numeric|min:4|max:100',
+            'rimOffset' => 'required|numeric|min:0|max:100',
+            'pcdRight' => 'required|numeric|min:0|max:100',
+            'pcdLeft' => 'required|numeric|min:0|max:100',
+            'centerFlangeRight' => 'required|numeric|min:0|max:100',
+            'centerFlangeLeft' => 'required|numeric|min:0|max:100',
         ];
     }
 
