@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="text-center">
+    <div class="text-center mb-3">
         <div class="btn btn-primary">マイデータベースに登録</div>
     </div>
 </div>
