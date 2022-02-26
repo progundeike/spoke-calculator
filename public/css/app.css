@@ -20463,3 +20463,7 @@ readers do not read off random characters that represent icons */
   margin-left: auto;
   max-width: 600px;
 }
+
+body {
+  background-color: white;
+}

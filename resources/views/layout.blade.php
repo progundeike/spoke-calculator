@@ -28,11 +28,11 @@
 
 </head>
 <body>
-    <header>
-    </header>
 
     @include('nav')
 
-    @yield('content')
+    <div class="pt-3">
+        @yield('content')
+    </div>
 </body>
 </html>

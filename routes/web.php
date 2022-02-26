@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('main');
-})->name('main');
+    return view('input');
+})->name('input');
 
 Route::get('/length', function () {
     return view('length');

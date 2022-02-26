@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', '計算')
+@section('title', 'SpokeCalc')
 
 @section('content')
 <div class="container-fluid">

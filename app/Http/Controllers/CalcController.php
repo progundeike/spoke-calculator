@@ -13,6 +13,7 @@ class CalcController extends Controller
     private $hole;
     private $pcd;
     private $flangeDistance;
+    private $hubOffset;
 
     const RADIAL = 1;
     const TWO_CROSS = 4;
@@ -64,15 +65,18 @@ class CalcController extends Controller
         $fourCrossR = $this->getSpokeLength(self::FOUR_CROSS, 'R');
         $fourCrossL = $this->getSpokeLength(self::FOUR_CROSS, 'L');
 
+        $hubOffset = abs($request->centerFlangeRight - $request->centerFlangeLeft) / 2;
+
         return view('length', [
-            'radialR' => $radialR,
-            'radialL' => $radialL,
-            'twoCrossR' => $twoCrossR,
-            'twoCrossL' => $twoCrossL,
-            'threeCrossR' => $threeCrossR,
-            'threeCrossL' => $threeCrossL,
-            'fourCrossR' => $fourCrossR,
-            'fourCrossL' => $fourCrossL,
+            'radial' => ['R' => $radialR, 'L' => $radialL],
+            'twoCross' => ['R' => $twoCrossR, 'L' => $twoCrossL],
+            'threeCross' => ['R' => $threeCrossR, 'L' => $threeCrossL],
+            'fourCross' => ['R' => $fourCrossR, 'L' => $fourCrossL],
+            'erd' => $this->erd,
+            'hole' => $this->hole,
+            'pcd' => $this->pcd,
+            'hubOffset' => $hubOffset,
+            'rimOffset' => $request->rimOffset,
         ]);
     }
 }
