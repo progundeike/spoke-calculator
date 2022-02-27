@@ -21,6 +21,10 @@ Route::get('/length', function () {
     return view('length');
 })->name('length');
 
+Route::get('/myDatabase', function () {
+    return view('myDatabase');
+})->name('myDatabase');
+
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
 Route::post('/length', [App\Http\Controllers\CalcController::class, 'calc'])->name('calc');
 
