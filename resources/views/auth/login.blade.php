@@ -43,7 +43,6 @@
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
                                     <label class="form-check-label" for="remember">
                                         ログイン状態を保存する
                                     </label>
@@ -66,6 +65,12 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="mt-4 px-2 text-center">
+                <div class="mb-1">
+                    ユーザー登録がまだの方は、こちら
+                </div>
+                <a class="btn btn-success" href="{{ route('register') }}">ユーザー登録</a>
             </div>
         </div>
     </div>

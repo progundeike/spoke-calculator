@@ -17,13 +17,7 @@ Route::get('/', function () {
     return view('input');
 })->name('input');
 
-Route::get('/length', function () {
-    return view('length');
-})->name('length');
-
-Route::get('/myDatabase', function () {
-    return view('myDatabase');
-})->name('myDatabase');
+Route::resource('/myDatabase', App\Http\Controllers\SpokeLengthListController::class)->middleware('auth');
 
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
 Route::post('/length', [App\Http\Controllers\CalcController::class, 'calc'])->name('calc');

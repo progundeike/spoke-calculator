@@ -1,8 +1,11 @@
-<nav class="navbar d-flex justify-content-between navbar-expand-sm navbar-light bg-light">
+<nav class="navbar d-flex justify-content-between navbar-expand navbar-light bg-light">
     <a class="navbar-brand mx-3" href="/">Spoke Calc</a>
     <!-- Right Side Of Navbar -->
     <ul class="navbar-nav ms-auto mx-3">
             <!-- Authentication Links -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('myDatabase.index') }}">マイデータベース</a>
+            </li>
             @guest
                 @if (Route::has('login'))
                     <li class="nav-item">
@@ -10,11 +13,6 @@
                     </li>
                 @endif
 
-                @if (Route::has('register'))
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">ユーザー登録</a>
-                    </li>
-                @endif
             @else
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

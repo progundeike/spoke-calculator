@@ -13,8 +13,6 @@ class CalcController extends Controller
     private $hole;
     private $pcd;
     private $flangeDistance;
-    private $hubOffset;
-
     const RADIAL = 1;
     const TWO_CROSS = 4;
     const THREE_CROSS = 6;
@@ -23,7 +21,7 @@ class CalcController extends Controller
 
     protected $redirectTo = '/';
 
-    public function getCorrectionValue(int $cross): float
+    private function getCorrectionValue(int $cross): float
     {
         $value = (float) 1;
         if($cross === self::RADIAL) {
@@ -32,7 +30,7 @@ class CalcController extends Controller
         return $value;
     }
 
-    public function getSpokeLength(int $cross, string $side): float
+    private function getSpokeLength(int $cross, string $side): float
     {
         $correctionValue = $this->getCorrectionValue($cross);
         $deg = 360 / $this->hole * $cross;
@@ -48,7 +46,7 @@ class CalcController extends Controller
     public function calc(CalcRequest $request)
     {
         $this->erd = (float) $request->erd;
-        $this->hole = (int) $request->numberOfSpoke;
+        $this->hole = (int) $request->hole;
         $this->rimOffset = (float) $request->rimOffset;
         $this->pcd = ['R' => (float) $request->pcdRight, 'L' => (float) $request->pcdLeft];
         $this->flangeDistance = [
@@ -65,18 +63,25 @@ class CalcController extends Controller
         $fourCrossR = $this->getSpokeLength(self::FOUR_CROSS, 'R');
         $fourCrossL = $this->getSpokeLength(self::FOUR_CROSS, 'L');
 
-        $hubOffset = abs($request->centerFlangeRight - $request->centerFlangeLeft) / 2;
+        $rimModel = $request->rimModel ?? 'リム';
+        $hubModel = $request->hubModel ?? 'ハブ';
 
         return view('length', [
-            'radial' => ['R' => $radialR, 'L' => $radialL],
-            'twoCross' => ['R' => $twoCrossR, 'L' => $twoCrossL],
-            'threeCross' => ['R' => $threeCrossR, 'L' => $threeCrossL],
-            'fourCross' => ['R' => $fourCrossR, 'L' => $fourCrossL],
+            'radialR' => $radialR,
+            'radialL' => $radialL,
+            'twoCrossR' => $twoCrossR,
+            'twoCrossL' => $twoCrossL,
+            'threeCrossR' => $threeCrossR,
+            'threeCrossL' => $threeCrossL,
+            'fourCrossR' => $fourCrossR,
+            'fourCrossL' => $fourCrossL,
             'erd' => $this->erd,
             'hole' => $this->hole,
             'pcd' => $this->pcd,
-            'hubOffset' => $hubOffset,
+            'flangeDistance' => ['R' => $request->centerFlangeRight, 'L' => $request->centerFlangeLeft],
             'rimOffset' => $request->rimOffset,
+            'rimModel' => $rimModel,
+            'hubModel' => $hubModel,
         ]);
     }
 }
