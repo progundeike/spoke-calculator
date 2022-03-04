@@ -21,6 +21,12 @@
         @endif
     </div>
     @endforeach
+
+    @if(count($lists) === 0)
+    <div>
+        まだデータが登録されていません。
+    </div>
+    @endif
 </div>
 
 @endsection

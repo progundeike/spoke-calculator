@@ -10,8 +10,6 @@ use Illuminate\Http\RedirectResponse;
 
 class SpokeLengthListController extends Controller
 {
-    private $lengthR;
-    private $lengthL;
 
     public function index()
     {

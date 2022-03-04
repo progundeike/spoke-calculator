@@ -10,11 +10,15 @@ class SpokeLengthList extends Model
 {
     use HasFactory;
 
-    // protected $fillable = [
-    //     'cross',
-    //     'lengthR',
-    //     'lengthL',
-    // ];
+    protected $fillable = [
+        'crossR',
+        'crossL',
+        'lengthR',
+        'lengthL',
+        'hubModel',
+        'rimModel',
+        //'wheelMemo',
+    ];
 
     public function user(): BelongsTo
     {
