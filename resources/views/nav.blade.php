@@ -1,5 +1,5 @@
 <nav class="navbar d-flex justify-content-between navbar-expand navbar-light bg-light">
-    <a class="navbar-brand mx-3" href="/">Spoke Calc</a>
+    <a class="navbar-brand mx-3" href="/">{{ config('app.name') }}</a>
     <!-- Right Side Of Navbar -->
     <ul class="navbar-nav ms-auto mx-3">
             <!-- Authentication Links -->
