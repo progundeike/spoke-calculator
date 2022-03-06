@@ -13,6 +13,7 @@ class CalcController extends Controller
     private $hole;
     private $pcd;
     private $flangeDistance;
+    private $nippleHoleGap = 0;
     const RADIAL = 1;
     const TWO_CROSS = 4;
     const THREE_CROSS = 6;
@@ -75,13 +76,18 @@ class CalcController extends Controller
             'threeCrossL' => $threeCrossL,
             'fourCrossR' => $fourCrossR,
             'fourCrossL' => $fourCrossL,
-            'erd' => $this->erd,
             'hole' => $this->hole,
-            'pcd' => $this->pcd,
-            'flangeDistance' => ['R' => $request->centerFlangeRight, 'L' => $request->centerFlangeLeft],
-            'rimOffset' => $request->rimOffset,
+            //rim
             'rimModel' => $rimModel,
+            'erd' => $this->erd,
+            'rimOffset' => $request->rimOffset,
+            'nippleHoleGap' => $this->nippleHoleGap,
+
+            //hub
             'hubModel' => $hubModel,
+            'pcd' => $this->pcd,
+            'centerFlangeR' => $request->centerFlangeRight,
+            'centerFlangeL' => $request->centerFlangeLeft,
         ]);
     }
 }

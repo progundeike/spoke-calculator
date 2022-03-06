@@ -25,7 +25,7 @@ class CreateSpokeLengthListsTable extends Migration
             $table->string('crossL');
             $table->float('lengthR', 4, 1);
             $table->float('lengthL', 4, 1);
-            $table->string('wheelMemo');
+            $table->string('wheelMemo')->nullable();
         });
     }
 

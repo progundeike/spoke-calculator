@@ -37,6 +37,12 @@ class SpokeLengthListRequest extends FormRequest
             'threeCrossL' => 'numeric|min:0|max:600',
             'fourCrossR' => 'numeric|min:0|max:600',
             'fourCrossL' => 'numeric|min:0|max:600',
+
+            'hole' => 'required|numeric|min:4|max:200',
+            'pcdR' => 'required|numeric|min:0|max:100',
+            'pcdL' => 'required|numeric|min:0|max:100',
+            'centerFlangeR' => 'required|numeric|min:0|max:100',
+            'centerFlangeL' => 'required|numeric|min:0|max:100',
         ];
     }
 }

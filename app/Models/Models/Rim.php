@@ -10,6 +10,14 @@ class Rim extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'rimModel',
+        'hole',
+        'erd',
+        'rimOffset',
+        'rimMemo',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo('Models\User');

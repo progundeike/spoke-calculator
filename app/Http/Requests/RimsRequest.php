@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HubsRequest extends FormRequest
+class RimsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,13 +24,11 @@ class HubsRequest extends FormRequest
     public function rules()
     {
         return [
-            'hubModel' => 'unique:hubs|required|string|max:100',
+            'rimModel' => 'string|max:30',
+            'erd' => 'required|numeric|min:100|max:1000',
             'hole' => 'required|numeric|min:4|max:200',
-            'pcdRight' => 'required|numeric|min:0|max:100',
-            'pcdLeft' => 'required|numeric|min:0|max:100',
-            'centerFlangeRight' => 'required|numeric|min:0|max:100',
-            'centerFlangeLeft' => 'required|numeric|min:0|max:100',
-            'hubMemo' => 'string|max:100',
+            'rimOffset' => 'required|numeric|min:0|max:100',
+            'rimMemo' => 'string|max:100',
         ];
     }
 }

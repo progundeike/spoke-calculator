@@ -45,9 +45,7 @@
         <div class="card-body">
             <div class="mb-2">
                 <h5>
-                    リム : {{ $rimModel }}
-                    {{ Form::hidden('rimModel', $rimModel) }}
-                    ({{ $hole }}H){{ Form::hidden('hole', $hole) }}
+                    リム : {{ $rimModel }} ({{ $hole }}H)
                 </h5>
                 ERD : {{ number_format($erd, 1) }}mm<br>
                 オフセット : {{ number_format($rimOffset, 1) }}mm
@@ -55,12 +53,12 @@
             <div class="mb-1">
                 <h5>
                     ハブ : {{ $hubModel }}
-                    {{ Form::hidden('hubModel', $hubModel) }}
                     ({{ $hole }}H)
                 </h5>
                 PCD : (左) {{ number_format($pcd['L'], 1) }}mm, (右) {{ number_format($pcd['R'], 1) }}mm <br>
-                センターフランジ間距離 : (左) {{ number_format($flangeDistance['L'], 1) }}mm
-                , (右) {{ number_format($flangeDistance['R'], 1) }}mm
+                センターフランジ間距離 : (左) {{ number_format($centerFlangeL, 1) }}mm
+                , (右) {{ number_format($centerFlangeR, 1) }}mm
+
             </div>
             <div>
                 {{ Form::label('wheelMemo', 'メモ欄' ) }}
@@ -73,6 +71,7 @@
         {{ Form::submit('マイデータベースに登録', ['class' => 'btn btn-primary']) }}
         <div class="btn btn-secondary">入力を修正(未実装)</div>
     </div>
+    <!-- length -->
     {{ Form::hidden('radialR', $radialR) }}
     {{ Form::hidden('radialL', $radialL) }}
     {{ Form::hidden('twoCrossR', $twoCrossR) }}
@@ -81,6 +80,19 @@
     {{ Form::hidden('threeCrossL', $threeCrossL) }}
     {{ Form::hidden('fourCrossR', $fourCrossR) }}
     {{ Form::hidden('fourCrossL', $fourCrossL) }}
+    {{ Form::hidden('hole', $hole) }}
+    <!-- hub -->
+    {{ Form::hidden('hubModel', $hubModel) }}
+    {{ Form::hidden('centerFlangeR', $centerFlangeR) }}
+    {{ Form::hidden('centerFlangeL', $centerFlangeL) }}
+    {{ Form::hidden('pcdR', $pcd['R']) }}
+    {{ Form::hidden('pcdL', $pcd['L']) }}
+    <!-- rim -->
+    {{ Form::hidden('rimModel', $rimModel) }}
+    {{ Form::hidden('erd', $erd) }}
+    {{ Form::hidden('rimOffset', $rimOffset) }}
+    {{ Form::hidden('nippleHoleGap', $nippleHoleGap) }}
+
     {{ Form::close() }}
 </div>
 @endsection

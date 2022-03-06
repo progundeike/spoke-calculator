@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Models\SpokeLengthList;
 use App\Http\Requests\SpokeLengthListRequest;
-use App\Http\Requests\CalcRequest;
+use App\Models\Models\Hub;
+use App\Models\Models\Rim;
 use Illuminate\Http\RedirectResponse;
 
 class SpokeLengthListController extends Controller
@@ -45,7 +46,7 @@ class SpokeLengthListController extends Controller
         return ['R' => $lengthR, 'L' =>$lengthL];
     }
 
-    public function store(SpokeLengthListRequest $request, SpokeLengthList $list)
+    public function store(SpokeLengthListRequest $request, SpokeLengthList $list, Hub $hubList, Rim $rimList)
     {
         $list->hubModel = $request->hubModel;
         $list->rimModel = $request->rimModel;
@@ -54,11 +55,29 @@ class SpokeLengthListController extends Controller
         $list->user_id = $request->user()->id;
 
         $length = $this->getLengthFromCross($request);
-        $list->lengthR = $length ['R'];
-        $list->lengthL = $length ['L'];
+        $list->lengthR = $length['R'];
+        $list->lengthL = $length['L'];
         $list->wheelMemo = $request->wheelMemo;
 
+        $hubList->user_id = $request->user()->id;
+        $hubList->hubModel = $request->hubModel;
+        $hubList->hole = $request->hole;
+        $hubList->centerFlangeR = $request->centerFlangeR;
+        $hubList->centerFlangeL = $request->centerFlangeL;
+        $hubList->pcdR = $request->pcdR;
+        $hubList->pcdL = $request->pcdL;
+
+        $rimList->user_id = $request->user()->id;
+        $rimList->rimModel = $request->rimModel;
+        $rimList->hole = $request->hole;
+        $rimList->erd = $request->erd;
+        $rimList->nippleHoleGap = $request->nippleHoleGap;
+        $rimList->rimOffset = $request->rimOffset;
+        $rimList->rimMemo = $request->rimMemo;
+
         $list->save();
+        $hubList->save();
+        $rimList->save();
         return redirect()->route('myDatabase.index');
     }
 }

@@ -17,7 +17,7 @@ class SpokeLengthList extends Model
         'lengthL',
         'hubModel',
         'rimModel',
-        //'wheelMemo',
+        'wheelMemo',
     ];
 
     public function user(): BelongsTo

@@ -18,6 +18,8 @@ Route::get('/', function () {
 })->name('input');
 
 Route::resource('/myDatabase', App\Http\Controllers\SpokeLengthListController::class)->middleware('auth');
+Route::resource('/hub', App\Http\Controllers\HubController::class)->middleware('auth');
+Route::resource('/rim', App\Http\Controllers\RimController::class)->middleware('auth');
 
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
 Route::post('/length', [App\Http\Controllers\CalcController::class, 'calc'])->name('calc');

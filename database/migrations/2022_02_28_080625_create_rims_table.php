@@ -16,12 +16,12 @@ class CreateRimsTable extends Migration
         Schema::create('rims', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('rim_model')->unique();
+            $table->string('rimModel')->unique();
             $table->bigInteger('hole');
             $table->float('erd', 4, 1);
             $table->float('nippleHoleGap', 4, 1);
             $table->float('rimOffset', 4, 1);
-            $table->string('rim_memo')->nullable();
+            $table->string('rimMemo')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

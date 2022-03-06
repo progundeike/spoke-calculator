@@ -16,13 +16,13 @@ class CreateHubsTable extends Migration
         Schema::create('hubs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('hub_model')->unique();
+            $table->string('hubModel')->unique();
             $table->bigInteger('hole');
-            $table->float('centerFlangeRight', 4, 1);
-            $table->float('centerFlangeLeft', 4, 1);
-            $table->float('pcdRight', 4, 1);
-            $table->float('pcdLeft', 4, 1);
-            $table->string('hub_memo')->nullable();
+            $table->float('centerFlangeR', 4, 1);
+            $table->float('centerFlangeL', 4, 1);
+            $table->float('pcdR', 4, 1);
+            $table->float('pcdL', 4, 1);
+            $table->string('hubMemo')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
