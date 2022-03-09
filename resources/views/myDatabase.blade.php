@@ -5,10 +5,7 @@
 @section('content')
 
 <div class="container-fluid">
-    <div class="text-center">
-        <a href="{{ route('rim.index') }}" class="btn btn-primary mx-3">リムのデータベース</a>
-        <a href="{{ route('hub.index') }}" class="btn btn-primary mx-3">ハブのデータベース</a>
-    </div>
+    <h3>ホイールのデータ一覧</h3>
     @foreach($lists as $list)
     <div class="card m-3">
             <div class="card-body">
@@ -21,7 +18,12 @@
                         メモ:{{ $list->wheelMemo }}
                     </div>
                 @endif
-                <div class="mt-1">{{ $list->updated_at}}</div>
+                <div class="d-flex justify-content-between mt-2">
+                    <div class="mt-1">更新日:{{ date('Y/m/d', strtotime($list->updated_at))}}</div>
+                    <div>
+                        <a href="" class="btn btn-success"><i class="fa-solid fa-pen-to-square"> 編集</i></a>
+                    </div>
+                </div>
             </div>
         </div>
     @endforeach

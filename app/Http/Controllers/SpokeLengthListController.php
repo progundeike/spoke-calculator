@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Models\SpokeLengthList;
 use App\Http\Requests\SpokeLengthListRequest;
 use App\Models\Models\Hub;
@@ -14,7 +15,7 @@ class SpokeLengthListController extends Controller
 
     public function index()
     {
-        $lists = SpokeLengthList::all()->sortByDesc('created_at');
+        $lists = SpokeLengthList::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
 
         return view('myDatabase', ['lists' => $lists]);
     }

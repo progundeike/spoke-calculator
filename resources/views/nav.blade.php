@@ -1,11 +1,18 @@
 <nav class="navbar d-flex justify-content-between navbar-expand navbar-light bg-light">
     <a class="navbar-brand mx-3" href="/">{{ config('app.name') }}</a>
     <!-- Right Side Of Navbar -->
+    <!-- Authentication Links -->
     <ul class="navbar-nav ms-auto mx-3">
-            <!-- Authentication Links -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('myDatabase.index') }}">マイデータベース</a>
-            </li>
+        <div class="dropdown">
+                <a href="#" class="nav-link dropdown-toggle" role="button" id="databaseLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    マイデータベース
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="databaseLink">
+                    <li><a href="{{route('myDatabase.index')}}" class="dropdown-item">ホイールのデータ一覧</a></li>
+                    <li><a href="{{route('hub.index')}}" class="dropdown-item">ハブのデータ一覧</a></li>
+                    <li><a href="{{route('rim.index')}}" class="dropdown-item">リムのデータ一覧</a></li>
+                </ul>
+        </div>
             @guest
                 @if (Route::has('login'))
                     <li class="nav-item">

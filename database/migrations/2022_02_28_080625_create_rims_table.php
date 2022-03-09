@@ -16,7 +16,7 @@ class CreateRimsTable extends Migration
         Schema::create('rims', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('rimModel')->unique();
+            $table->string('rimModel');
             $table->bigInteger('hole');
             $table->float('erd', 4, 1);
             $table->float('nippleHoleGap', 4, 1);

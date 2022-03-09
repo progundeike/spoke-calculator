@@ -16,7 +16,7 @@ class CreateHubsTable extends Migration
         Schema::create('hubs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('hubModel')->unique();
+            $table->string('hubModel');
             $table->bigInteger('hole');
             $table->float('centerFlangeR', 4, 1);
             $table->float('centerFlangeL', 4, 1);

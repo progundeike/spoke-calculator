@@ -5,9 +5,11 @@
 @section('content')
 
 <div class="container-fluid">
-    <div class="text-center">
-        <a href="{{ route('myDatabase.index') }}" class="btn btn-primary mx-3">ホイールのデータベース</a>
-        <a href="{{ route('hub.index') }}" class="btn btn-primary mx-3">ハブのデータベース</a>
+    <div class="d-flex justify-content-between">
+        <h3>
+            リムのデータ一覧
+        </h3>
+        <a class="btn btn-danger" href="{{ 'rim/create' }}" role="button">新規作成</a>
     </div>
     @foreach($lists as $list)
     <div class="card m-3">
@@ -30,7 +32,12 @@
             {{ $list->rimMemo }}
             @endif
         </div>
-        <div>更新日 {{ $list->updated_at}}</div>
+        <div class="d-flex justify-content-between mt-2">
+            <div class="mt-1">更新日:{{ date('Y/m/d', strtotime($list->updated_at))}}</div>
+            <div>
+                <a href="" class="btn btn-success"><i class="fa-solid fa-pen-to-square"> 編集</i></a>
+            </div>
+        </div>
     </div>
     @endforeach
     @if(count($lists) === 0)

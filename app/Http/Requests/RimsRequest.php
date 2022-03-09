@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class RimsRequest extends FormRequest
 {
@@ -24,7 +25,9 @@ class RimsRequest extends FormRequest
     public function rules()
     {
         return [
-            'rimModel' => 'string|max:30',
+            'rimModel' => [Rule::unique('rims')->where(function($query) {
+                return $query->where('user_id', $this->user()->id);
+            }), 'required', 'string', 'max:100'],
             'erd' => 'required|numeric|min:100|max:1000',
             'hole' => 'required|numeric|min:4|max:200',
             'rimOffset' => 'required|numeric|min:0|max:100',

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SpokeLengthListRequest extends FormRequest
 {
@@ -24,8 +25,12 @@ class SpokeLengthListRequest extends FormRequest
     public function rules()
     {
         return [
-            'hubModel' => 'string|max:30',
-            'rimModel' => 'string|max:30',
+            'hubModel' => [Rule::unique('hubs')->where(function($query) {
+                return $query->where('user_id', $this->user()->id);
+            }), 'required', 'string', 'max:100'],
+            'rimModel' => [Rule::unique('rims')->where(function($query) {
+                return $query->where('user_id', $this->user()->id);
+            }), 'required', 'string', 'max:100'],
             'crossR' => 'string|max:5',
             'crossL' => 'string|max:5',
             'wheelMemo' => 'nullable|string|max:200',
@@ -37,7 +42,6 @@ class SpokeLengthListRequest extends FormRequest
             'threeCrossL' => 'numeric|min:0|max:600',
             'fourCrossR' => 'numeric|min:0|max:600',
             'fourCrossL' => 'numeric|min:0|max:600',
-
             'hole' => 'required|numeric|min:4|max:200',
             'pcdR' => 'required|numeric|min:0|max:100',
             'pcdL' => 'required|numeric|min:0|max:100',

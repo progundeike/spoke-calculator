@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('input');
 })->name('input');
+// Route::get('/hub/add', function () {
+//     return view('hubAdd');
+// })->middleware('auth');
 
 Route::resource('/myDatabase', App\Http\Controllers\SpokeLengthListController::class)->middleware('auth');
 Route::resource('/hub', App\Http\Controllers\HubController::class)->middleware('auth');

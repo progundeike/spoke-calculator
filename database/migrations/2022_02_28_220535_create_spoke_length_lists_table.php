@@ -19,8 +19,8 @@ class CreateSpokeLengthListsTable extends Migration
             $table->timestamps();
             //外部キー制約
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('hubModel')->unique();
-            $table->string('rimModel')->unique();
+            $table->string('hubModel');
+            $table->string('rimModel');
             $table->string('crossR');
             $table->string('crossL');
             $table->float('lengthR', 4, 1);

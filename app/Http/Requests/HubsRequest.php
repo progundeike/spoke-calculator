@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class HubsRequest extends FormRequest
 {
@@ -24,13 +25,27 @@ class HubsRequest extends FormRequest
     public function rules()
     {
         return [
-            'hubModel' => 'unique:hubs|required|string|max:100',
+            'hubModel' => [Rule::unique('hubs')->where(function($query) {
+                return $query->where('user_id', $this->user()->id);
+            }), 'required', 'string', 'max:100'],
             'hole' => 'required|numeric|min:4|max:200',
-            'pcdRight' => 'required|numeric|min:0|max:100',
-            'pcdLeft' => 'required|numeric|min:0|max:100',
-            'centerFlangeRight' => 'required|numeric|min:0|max:100',
-            'centerFlangeLeft' => 'required|numeric|min:0|max:100',
+            'pcdR' => 'required|numeric|min:0|max:100',
+            'pcdL' => 'required|numeric|min:0|max:100',
+            'centerFlangeR' => 'required|numeric|min:0|max:100',
+            'centerFlangeL' => 'required|numeric|min:0|max:100',
             'hubMemo' => 'string|max:100',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'hole' => 'スポークの本数',
+            'pcdR' => 'PCD(ドライブサイド)',
+            'pcdL' => 'PCD(ノンドライブサイド)',
+            'centerFlangeR' => 'センターフランジ間距離(ドライブサイド)',
+            'centerFlangeL' => 'センターフランジ間距離(ノンドライブサイド)',
+            'hubModel' => 'ハブの名称',
         ];
     }
 }
