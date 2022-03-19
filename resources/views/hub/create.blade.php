@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="container-fluid">
-    {{ Form::open(['url' => 'hub', 'method' => 'post']) }}
+    {{ Form::open(['url' => 'hub', 'method' => 'post', 'autocomplete' => 'off']) }}
     {{ Form::token() }}
     @if ($errors->any())
         <div class="alert alert-danger mt-3">

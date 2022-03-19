@@ -1,11 +1,11 @@
 @extends('layout')
 
-@section('title', '新規作成(ハブ)')
+@section('title', '新規作成(リム)')
 
 @section('content')
 
 <div class="container-fluid">
-    {{ Form::open(['url' => 'rim', 'method' => 'post']) }}
+    {{ Form::open(['url' => 'rim', 'method' => 'post', 'autocomplete' => 'off']) }}
     {{ Form::token() }}
     @if ($errors->any())
         <div class="alert alert-danger mt-3">
@@ -21,7 +21,7 @@
             {{ Form::label('rimModel', 'リムの名称') }}
             {{ Form::text('rimModel', old('rimModel'),['class' => 'form-control', 'id' => 'rimModel']) }}
         </div>
-        <div class="mb-3">
+        <div class="mb-3 col-6">
             {{ Form::label('hole', 'スポークの本数') }}
             {{ Form::number('hole', old('hole'),['class' => 'form-control', 'id' => 'hole']) }}
         </div>
@@ -32,6 +32,10 @@
         <div class="mb-3 col-6">
             {{ Form::label('rimOffset', 'リムオフセット (mm)') }}
             {{ Form::text('rimOffset', 0,['class' => 'form-control', 'id' => 'RimOffset']) }}
+        </div>
+        <div class="mb-3 col-6">
+            {{ Form::label('nippleHoleGap', 'リムの穴振り (mm)') }}
+            {{ Form::text('nippleHoleGap', old('nippleHoleGap', 0),['class' => 'form-control', 'id' => 'nippleHoleGap']) }}
         </div>
         <div class="mb-4">
             {{ Form::label('rimMemo', 'メモ欄') }}

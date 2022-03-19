@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Models\SpokeLengthList;
 use App\Http\Requests\SpokeLengthListRequest;
+use App\Http\Requests\UpdateWheelRequest;
 use App\Models\Models\Hub;
 use App\Models\Models\Rim;
 use Illuminate\Http\RedirectResponse;
@@ -17,7 +18,7 @@ class SpokeLengthListController extends Controller
     {
         $lists = SpokeLengthList::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
 
-        return view('myDatabase', ['lists' => $lists]);
+        return view('wheel.index', ['lists' => $lists]);
     }
 
     private function getLengthFromCross(SpokeLengthListRequest $request) : array
@@ -79,6 +80,27 @@ class SpokeLengthListController extends Controller
         $list->save();
         $hubList->save();
         $rimList->save();
-        return redirect()->route('myDatabase.index');
+        return redirect()->route('wheel.index');
+    }
+
+    public function destroy($id)
+    {
+        $wheel = SpokeLengthList::find($id);
+        $wheel->delete();
+        return redirect()->route('wheel.index');
+    }
+
+    public function edit($id)
+    {
+        $wheel = SpokeLengthList::find($id);
+        return view('wheel.edit', compact('wheel'));
+    }
+
+    public function update(UpdateWheelRequest $request)
+    {
+        $wheel = SpokeLengthList::find($request->id);
+        $wheel->wheelMemo = $request->wheelMemo;
+        $wheel->save();
+        return redirect()->route('wheel.index');
     }
 }

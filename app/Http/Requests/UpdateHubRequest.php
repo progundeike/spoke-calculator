@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class HubsRequest extends FormRequest
+class UpdateHubRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,7 @@ class HubsRequest extends FormRequest
     public function rules()
     {
         return [
-            'hubModel' => [Rule::unique('hubs')->where(function($query) {
-                return $query->where('user_id', $this->user()->id);
-            }), 'required', 'string', 'max:100'],
+            'hubModel' => 'required|string|max:100',
             'hole' => 'required|numeric|min:4|max:200',
             'pcdR' => 'required|numeric|min:0|max:100',
             'pcdL' => 'required|numeric|min:0|max:100',

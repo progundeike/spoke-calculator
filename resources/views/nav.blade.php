@@ -8,7 +8,7 @@
                     マイデータベース
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="databaseLink">
-                    <li><a href="{{route('myDatabase.index')}}" class="dropdown-item">ホイールのデータ一覧</a></li>
+                    <li><a href="{{route('wheel.index')}}" class="dropdown-item">ホイールのデータ一覧</a></li>
                     <li><a href="{{route('hub.index')}}" class="dropdown-item">ハブのデータ一覧</a></li>
                     <li><a href="{{route('rim.index')}}" class="dropdown-item">リムのデータ一覧</a></li>
                 </ul>

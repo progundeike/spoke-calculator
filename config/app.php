@@ -14,7 +14,7 @@ return [
     */
 
     //'name' => env('APP_NAME', 'Laravel'),
-    'name' => 'Spoke Calculator (β-version)',
+    'name' => 'Spoke Length (β-version)',
 
     /*
     |--------------------------------------------------------------------------

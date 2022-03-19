@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\RegisteredNotification;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendRegistrationMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -44,7 +48,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * ユーザー登録後、投稿画面に遷移する
+     * ユーザー登録後、入力画面に遷移する
      * @param UserCreateRequest $request
      * @return RedirectResponse
      */
@@ -56,9 +60,10 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $this->guard()->login($user);
+        //メール送信
+        SendRegistrationMail::dispatch($request);
 
+        $this->guard()->login($user);
         return redirect()->route('input');
     }
-
 }

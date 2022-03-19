@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Mail\CustomMail;
 use App\Notifications\PasswordResetNotification;
+use App\Notifications\RegisterNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
