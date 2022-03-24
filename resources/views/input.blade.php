@@ -97,52 +97,5 @@
     {{ Form::close() }}
     </div>
 </div>
-<!-- <script src="{{ mix('js/autoFormInput.js') }}"></script> -->
-<script>
-//autoFormInput
-$('#selectRim').change(function() {
-    var selectedRim = $(this).val();
-    $.ajax({
-        type: "POST",
-        url: "{{ route('rim.input') }}",
-        data: {
-            "selectedRim" : selectedRim,
-            "_token":"{{ csrf_token() }}"
-        },
-        dataType: "json"
-    }).done(function(data) {
-        //成功の処理
-        $('#hole').val(data.hole);
-        $('#erd').val(data.erd);
-        $('#rimOffset').val(data.rimOffset);
-        $('#nippleHoleGap').val(data.nippleHoleGap);
-    }).fail(function(){
-        //エラーの処理
-        alert('データベースに不具合が発生しました。手動での入力をお願い致します。')
-    });
-});
-
-$('#selectedHub').change(function() {
-    var selectedHub = $(this).val();
-    $.ajax({
-        type: "POST",
-        url: "{{ route('hub.input') }}",
-        data: {
-            "selectedHub" : selectedHub,
-            "_token":"{{ csrf_token() }}"
-        },
-        dataType: "json"
-    }).done(function(data) {
-        //成功の処理
-        $('#centerFlangeR').val(data.centerFlangeR);
-        $('#centerFlangeL').val(data.centerFlangeL);
-        $('#pcdR').val(data.pcdR);
-        $('#pcdL').val(data.pcdL);
-    }).fail(function(){
-        //エラーの処理
-        alert('データベースに不具合が発生しました。手動での入力をお願い致します。')
-    });
-});
-
-</script>
+<script src="{{ mix('js/autoFormInput.js') }}"></script>
 @endsection

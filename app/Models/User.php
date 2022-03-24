@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Mail\CustomMail;
+use App\Mail\BareMail;
 use App\Notifications\PasswordResetNotification;
 use App\Notifications\RegisterNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -47,6 +47,11 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new PasswordResetNotification($token, new CustomMail()));
+        $this->notify(new PasswordResetNotification($token, new BareMail()));
+    }
+
+    public function sendRegisterNotification()
+    {
+        $this->notify(new RegisterNotification(new BareMail()));
     }
 }

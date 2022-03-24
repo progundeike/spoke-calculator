@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\SendRegistrationMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Notifications\RegisterNotification;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -61,7 +62,9 @@ class RegisterController extends Controller
         ]);
 
         //メール送信
-        SendRegistrationMail::dispatch($request);
+        //SendRegistrationMail::dispatch($user);
+        //Mail::to($user->email)->send(new RegisteredNotification($user->name));
+        $user->sendRegisterNotification();
 
         $this->guard()->login($user);
         return redirect()->route('input');

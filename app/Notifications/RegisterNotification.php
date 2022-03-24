@@ -2,17 +2,17 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use App\Mail\BareMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PasswordResetNotification extends Notification implements ShouldQueue
+class RegisterNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public $token;
     public $mail;
 
     /**
@@ -20,9 +20,8 @@ class PasswordResetNotification extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(string $token, BareMail $mail)
+    public function __construct(BareMail $mail)
     {
-        $this->token = $token;
         $this->mail = $mail;
     }
 
@@ -48,16 +47,9 @@ class PasswordResetNotification extends Notification implements ShouldQueue
         return $this->mail
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->to($notifiable->email)
-            ->subject('[' . config('app.name') . '] パスワード再設定')
-            ->text('emails.password_reset')
+            ->text('emails.registered')
             ->with([
-                'url' => route('password.reset', [
-                    'token' => $this->token,
-                    'email' => $notifiable->email,
-                ]),
-                'count' => config(
-                    'auth.passwords.' . config('auth.defaults.passwords') . '.expire'
-                ),
+                'name' => $notifiable->name,
             ]);
     }
 

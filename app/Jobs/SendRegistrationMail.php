@@ -11,22 +11,19 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class SendRegistrationMail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $email;
-    private $name;
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct($request)
+    public $email;
+    public $name;
+
+    public function __construct(User $user)
     {
-        $this->email = $request->email;
-        $this->name = $request->name;
+        $this->email = $user->email;
+        $this->name = $user->name;
     }
 
     /**

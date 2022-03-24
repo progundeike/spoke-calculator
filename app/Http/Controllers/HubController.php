@@ -65,7 +65,6 @@ class HubController extends Controller
     static function getMyList()
     {
         $hubLists = Hub::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
-
         $lists = [];
         foreach($hubLists as $hubList) {
             $lists[$hubList['id']] = $hubList['hubModel'];

@@ -33,6 +33,6 @@ class RegisteredNotification extends Mailable
         return $this->from(config('mail.from.address'), config('mail.from.name'))
         ->subject('[Spoke Length] 登録完了のお知らせ')
         ->text('emails.registered')
-        ->with(['name' => $this->name]);
+        ->with($this->name);
     }
 }
