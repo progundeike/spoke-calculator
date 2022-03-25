@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
-    {{ Form::open(['url' => route('myDatabase.store'), 'method' => 'post']) }}
+    {{ Form::open(['url' => route('wheel.store'), 'method' => 'post']) }}
     {{ Form::token() }}
     <div class="mt-3 mb-3 text-center">
         <table class="table table-bordered">
