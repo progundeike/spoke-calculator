@@ -13,7 +13,6 @@ use Illuminate\Http\RedirectResponse;
 
 class SpokeLengthListController extends Controller
 {
-
     public function index()
     {
         $lists = SpokeLengthList::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
@@ -21,28 +20,26 @@ class SpokeLengthListController extends Controller
         return view('wheel.index', ['lists' => $lists]);
     }
 
-    private function getLengthFromCross(SpokeLengthListRequest $request) : array
+    private function getLengthFromCross(string $crossR, string $crossL) : array
     {
-        $crossR = $request->crossR;
         if($crossR === 'one') {
-            $lengthR = $request->radialR;
+            $lengthR = session('radialR');
         } elseif($crossR === 'two') {
-            $lengthR = $request->twoCrossR;
+            $lengthR = session('twoCrossR');
         } elseif($crossR === 'three') {
-            $lengthR = $request->threeCrossR;
+            $lengthR = session('threeCrossR');
         } elseif($crossR === 'four') {
-            $lengthR = $request->fourCrossR;
+            $lengthR = session('fourCrossR');
         }
 
-        $crossL = $request->crossL;
-        if($request->crossL === 'one') {
-            $lengthL = $request->radialL;
+        if($crossL === 'one') {
+            $lengthL = session('radialL');
         } elseif($crossL === 'two') {
-            $lengthL = $request->twoCrossL;
+            $lengthL = session('twoCrossL');
         } elseif($crossL === 'three') {
-            $lengthL = $request->threeCrossL;
+            $lengthL = session('threeCrossL');
         } elseif($crossL === 'four') {
-            $lengthL = $request->fourCrossL;
+            $lengthL = session('fourCrossL');
         }
 
         return ['R' => $lengthR, 'L' =>$lengthL];
@@ -50,28 +47,23 @@ class SpokeLengthListController extends Controller
 
     public function store(SpokeLengthListRequest $request, SpokeLengthList $list, Hub $hubList, Rim $rimList)
     {
-        $list->hubModel = $request->hubModel;
-        $list->rimModel = $request->rimModel;
+        $list->user_id = $hubList->user_id = $rimList->user_id = $request->user()->id;
+        $list->hubModel = $hubList->hubModel = session('hubModel');
+        $list->rimModel = $rimList->rimModel = session('rimModel');
         $list->crossR = $request->crossR;
         $list->crossL = $request->crossL;
-        $list->user_id = $request->user()->id;
 
-        $length = $this->getLengthFromCross($request);
+        $length = $this->getLengthFromCross($request->crossR, $request->crossL);
         $list->lengthR = $length['R'];
         $list->lengthL = $length['L'];
         $list->wheelMemo = $request->wheelMemo;
 
-        $hubList->user_id = $request->user()->id;
-        $hubList->hubModel = $request->hubModel;
-        $hubList->hole = $request->hole;
-        $hubList->centerFlangeR = $request->centerFlangeR;
-        $hubList->centerFlangeL = $request->centerFlangeL;
-        $hubList->pcdR = $request->pcdR;
-        $hubList->pcdL = $request->pcdL;
+        $hubList->hole = $rimList->hole = session('hole');
+        $hubList->centerFlangeR = session('centerFlangeR');
+        $hubList->centerFlangeL = session('centerFlangeL');
+        $hubList->pcdR = session('pcdR');
+        $hubList->pcdL = session('pcdL');
 
-        $rimList->user_id = $request->user()->id;
-        $rimList->rimModel = $request->rimModel;
-        $rimList->hole = $request->hole;
         $rimList->erd = $request->erd;
         $rimList->nippleHoleGap = $request->nippleHoleGap;
         $rimList->rimOffset = $request->rimOffset;

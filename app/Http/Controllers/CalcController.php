@@ -22,9 +22,21 @@ class CalcController extends Controller
 
     protected $redirectTo = '/';
 
+    public function __construct(CalcRequest $request)
+    {
+        $this->erd = (float) $request->erd;
+        $this->hole = (int) $request->hole;
+        $this->rimOffset = (float) $request->rimOffset;
+        $this->pcd = ['R' => (float) $request->pcdR, 'L' => (float) $request->pcdL];
+        $this->flangeDistance = [
+            'R' => (float) $request->centerFlangeR - $request->rimOffset,
+            'L' => (float) $request->centerFlangeL + $request->rimOffset,
+            ];
+    }
+
     private function getCorrectionValue(int $cross): float
     {
-        $value = (float) 1;
+        $value = (float) 0.7;
         if($cross === self::RADIAL) {
             $value += 1.2;
         }
@@ -46,15 +58,6 @@ class CalcController extends Controller
 
     public function calc(CalcRequest $request)
     {
-        $this->erd = (float) $request->erd;
-        $this->hole = (int) $request->hole;
-        $this->rimOffset = (float) $request->rimOffset;
-        $this->pcd = ['R' => (float) $request->pcdRight, 'L' => (float) $request->pcdLeft];
-        $this->flangeDistance = [
-            'R' => (float) $request->centerFlangeRight - $request->rimOffset,
-            'L' => (float) $request->centerFlangeLeft + $request->rimOffset,
-            ];
-
         $radialR = $this->getSpokeLength(self::RADIAL, 'R');
         $radialL = $this->getSpokeLength(self::RADIAL, 'L');
         $twoCrossR = $this->getSpokeLength(self::TWO_CROSS, 'R');
@@ -67,7 +70,8 @@ class CalcController extends Controller
         $rimModel = $request->rimModel ?? 'リム';
         $hubModel = $request->hubModel ?? 'ハブ';
 
-        return view('length', [
+        //計算後にsessionに入れる
+        session([
             'radialR' => $radialR,
             'radialL' => $radialL,
             'twoCrossR' => $twoCrossR,
@@ -85,9 +89,12 @@ class CalcController extends Controller
 
             //hub
             'hubModel' => $hubModel,
-            'pcd' => $this->pcd,
-            'centerFlangeR' => $request->centerFlangeRight,
-            'centerFlangeL' => $request->centerFlangeLeft,
+            'pcdL' => $this->pcd['L'],
+            'pcdR' => $this->pcd['R'],
+            'centerFlangeR' => $request->centerFlangeR,
+            'centerFlangeL' => $request->centerFlangeL,
         ]);
+
+        return view('length');
     }
 }
