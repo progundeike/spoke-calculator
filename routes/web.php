@@ -17,12 +17,9 @@ Route::get('/', function () {
     return view('input');
 })->name('input');
 
-Route::resource('/wheel', App\Http\Controllers\SpokeLengthListController::class)
-    ->only('index', 'create', 'store', 'edit', 'destroy', 'update')->middleware('auth');
-Route::resource('/hub', App\Http\Controllers\HubController::class)
-    ->only('index', 'create', 'store', 'edit', 'destroy', 'update')->middleware('auth');
-Route::resource('/rim', App\Http\Controllers\RimController::class)
-    ->only('index', 'create', 'store', 'edit', 'destroy', 'update')->middleware('auth');
+Route::resource('/wheel', App\Http\Controllers\SpokeLengthListController::class)->middleware('auth');
+Route::resource('/hub', App\Http\Controllers\HubController::class)->middleware('auth');
+Route::resource('/rim', App\Http\Controllers\RimController::class)->middleware('auth');
 Route::post('/rim/input', [App\Http\Controllers\RimController::class, 'inputFormData'])->middleware('auth')->name('rim.input');
 Route::post('/hub/input', [App\Http\Controllers\HubController::class, 'inputFormData'])->middleware('auth')->name('hub.input');
 
@@ -31,3 +28,8 @@ Route::post('/register/mail', [App\Http\Controllers\Auth\RegisterController::cla
 Route::post('/length', [App\Http\Controllers\CalcController::class, 'calc'])->name('calc');
 
 Auth::routes();
+
+
+// Route::resource('/rim', App\Http\Controllers\RimController::class)
+//     //->only('index', 'create', 'store', 'edit', 'destroy', 'update')
+//     ->middleware('auth');

@@ -22,18 +22,6 @@ class CalcController extends Controller
 
     protected $redirectTo = '/';
 
-    public function __construct(CalcRequest $request)
-    {
-        $this->erd = (float) $request->erd;
-        $this->hole = (int) $request->hole;
-        $this->rimOffset = (float) $request->rimOffset;
-        $this->pcd = ['R' => (float) $request->pcdR, 'L' => (float) $request->pcdL];
-        $this->flangeDistance = [
-            'R' => (float) $request->centerFlangeR - $request->rimOffset,
-            'L' => (float) $request->centerFlangeL + $request->rimOffset,
-            ];
-    }
-
     private function getCorrectionValue(int $cross): float
     {
         $value = (float) 0.7;
@@ -58,6 +46,15 @@ class CalcController extends Controller
 
     public function calc(CalcRequest $request)
     {
+        $this->erd = (float) $request->erd;
+        $this->hole = (int) $request->hole;
+        $this->rimOffset = (float) $request->rimOffset;
+        $this->pcd = ['R' => (float) $request->pcdR, 'L' => (float) $request->pcdL];
+        $this->flangeDistance = [
+            'R' => (float) $request->centerFlangeR - $request->rimOffset,
+            'L' => (float) $request->centerFlangeL + $request->rimOffset,
+            ];
+
         $radialR = $this->getSpokeLength(self::RADIAL, 'R');
         $radialL = $this->getSpokeLength(self::RADIAL, 'L');
         $twoCrossR = $this->getSpokeLength(self::TWO_CROSS, 'R');

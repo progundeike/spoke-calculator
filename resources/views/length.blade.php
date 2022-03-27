@@ -59,16 +59,22 @@
                 , (右) {{ number_format(session('centerFlangeR'), 1) }}mm
 
             </div>
-            <div>
-                {{ Form::label('wheelMemo', 'メモ欄' ) }}
-                {{ Form::text('wheelMemo', old('wheelMemo'), ['class' => "form-control", 'id'=> "wheelMemo"]) }}
-            </div>
+            @auth
+                <div>
+                    {{ Form::label('wheelMemo', 'メモ欄' ) }}
+                    {{ Form::text('wheelMemo', old('wheelMemo'), ['class' => "form-control", 'id'=> "wheelMemo"]) }}
+                </div>
+            @endauth
         </div>
     </div>
-    <div class="text-center mb-3">
-        {{ Form::submit('マイデータベースに登録', ['class' => 'btn btn-primary']) }}
-        <div class="btn btn-secondary">入力を修正(未実装)</div>
-    </div>
-    {{ Form::close() }}
+    @auth
+        <div class="text-center mb-3">
+            {{ Form::submit('マイデータベースに登録', ['class' => 'btn btn-primary']) }}
+            <div class="btn btn-secondary">入力を修正(未実装)</div>
+        </div>
+        {{ Form::close() }}
+    @else
+        <h5>ユーザー登録をすると、スポーク長の記録や、リム、ハブの情報を次回の計算に使用することができます</h5>
+    @endauth
 </div>
 @endsection

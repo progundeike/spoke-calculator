@@ -18,16 +18,15 @@
     @endif
 
     <div class="row">
-        <div class="my-3">
-            {{ Form::label('rimModel', 'リムの名称') }}
-            {{ Form::text('rimModel', old('rimModel'),['class' => 'form-control', 'id' => 'rimModel']) }}
-            <span class="form-text">
-                リムの名称を登録することで、次回の入力時にマイデータベースから引用できます。
-            </span>
-        </div>
-
         <!-- リムの情報 -->
         @auth
+            <div class="my-3">
+                {{ Form::label('rimModel', 'リムの名称') }}
+                {{ Form::text('rimModel', old('rimModel'),['class' => 'form-control', 'id' => 'rimModel']) }}
+                <span class="form-text">
+                    リムの名称を登録することで、次回の入力時にマイデータベースから引用できます。
+                </span>
+            </div>
             <div class="mb-3">
                 <div>
                     {{ Form::select('selectRim', App\Http\Controllers\RimController::getMyList(), old('selectRim'), ['class' => 'form-select form-select', 'id' => 'selectRim', 'placeholder' => 'マイデータベースから引用'])}}
@@ -56,14 +55,14 @@
         </div>
 
         <!-- ハブの情報 -->
-        <div class="my-3">
-            {{ Form::label('hubModel', 'ハブの名称') }}
-            {{ Form::text('hubModel', old('hubModel'),['class' => 'form-control', 'id' => 'hubModel']) }}
-            <span class="form-text">
-                ハブの名称を登録することで、次回の入力時にマイデータベースから引用できます。
-            </span>
-        </div>
         @auth
+            <div class="my-3">
+                {{ Form::label('hubModel', 'ハブの名称') }}
+                {{ Form::text('hubModel', old('hubModel'),['class' => 'form-control', 'id' => 'hubModel']) }}
+                <span class="form-text">
+                    ハブの名称を登録することで、次回の入力時にマイデータベースから引用できます。
+                </span>
+            </div>
             <div class="mb-3">
                 <div>
                     {{ Form::select('selectedHub', App\Http\Controllers\HubController::getMyList(), old('selectedHub'), ['class' => 'form-select form-select', 'id' => 'selectedHub', 'placeholder' => 'マイデータベースから引用'])}}
