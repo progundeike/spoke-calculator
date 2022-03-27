@@ -64,10 +64,10 @@ class SpokeLengthListController extends Controller
         $hubList->pcdR = session('pcdR');
         $hubList->pcdL = session('pcdL');
 
-        $rimList->erd = $request->erd;
-        $rimList->nippleHoleGap = $request->nippleHoleGap;
-        $rimList->rimOffset = $request->rimOffset;
-        $rimList->rimMemo = $request->rimMemo;
+        $rimList->erd = session('erd');
+        $rimList->nippleHoleGap = session('nippleHoleGap');
+        $rimList->rimOffset = session('rimOffset');
+        $rimList->rimMemo = session('rimMemo');
 
         $list->save();
         $hubList->save();
