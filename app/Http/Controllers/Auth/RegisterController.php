@@ -62,8 +62,6 @@ class RegisterController extends Controller
         ]);
 
         //メール送信
-        //SendRegistrationMail::dispatch($user);
-        //Mail::to($user->email)->send(new RegisteredNotification($user->name));
         $user->sendRegisterNotification();
 
         $this->guard()->login($user);

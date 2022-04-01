@@ -47,6 +47,7 @@ class RegisterNotification extends Notification implements ShouldQueue
         return $this->mail
             ->from(config('mail.from.address'), config('mail.from.name'))
             ->to($notifiable->email)
+            ->bcc(['no-reply@spokelength.net'])
             ->subject('[' . config('app.name') . '] ユーザー登録完了')
             ->text('emails.registered')
             ->with([

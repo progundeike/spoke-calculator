@@ -91,7 +91,7 @@
         </div>
     </div>
     <div class="text-center mb-3">
-        {{ Form::submit('スポーク長計算', ['class' => 'btn btn-primary ']) }}
+        {{ Form::submit('スポーク長計算', ['class' => 'btn btn-primary']) }}
     </div>
     {{ Form::close() }}
     </div>
