@@ -10,15 +10,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('register') }}">ユーザー登録</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="{{ route('inquiry') }}">お問合せ</a>
+                </li>
         @else
             <div class="dropdown">
                 <a href="#" class="nav-link dropdown-toggle" role="button" id="databaseLink" data-bs-toggle="dropdown" aria-expanded="false">
                     マイデータベース
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="databaseLink">
-                    <li><a href="{{route('wheel.index')}}" class="dropdown-item">ホイールのデータ一覧</a></li>
-                    <li><a href="{{route('hub.index')}}" class="dropdown-item">ハブのデータ一覧</a></li>
-                    <li><a href="{{route('rim.index')}}" class="dropdown-item">リムのデータ一覧</a></li>
+                    <li><a href="{{route('wheel.index')}}" class="dropdown-item">マイホイールデータ</a></li>
+                    <li><a href="{{route('hub.index')}}" class="dropdown-item">マイハブデータ</a></li>
+                    <li><a href="{{route('rim.index')}}" class="dropdown-item">マイリムデータ</a></li>
                 </ul>
             </div>
             <li class="nav-item dropdown">
@@ -35,6 +38,9 @@
                         @csrf
                     </form>
                 </div>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ route('inquiry') }}">お問合せ</a>
             </li>
         @endguest
     </ul>
