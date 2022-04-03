@@ -18,23 +18,44 @@
             <tbody>
                 <tr>
                     <th scope="row">ラジアル組</th>
-                    <td>{{ Form::radio('crossL', 'one', false) }} {{ number_format(session('radialL'), 1) }} mm</td>
-                    <td>{{ Form::radio('crossR', 'one', false) }} {{ number_format(session('radialR'), 1) }} mm</td>
+                    <td>{{ Form::radio('crossL', 'radial', false) }} {{ number_format(session('radialL'), 1) }} mm</td>
+                    <td>{{ Form::radio('crossR', 'radial', false) }} {{ number_format(session('radialR'), 1) }} mm</td>
+                </tr>
+                <tr>
+                    <th scope="row">2本組</th>
+                    @if (session('hole') >= 8)
+                        <td>{{ Form::radio('crossL', 'one', false) }} {{ number_format(session('oneCrossL'), 1) }} mm</td>
+                        <td>{{ Form::radio('crossR', 'one', false) }} {{ number_format(session('oneCrossR'), 1) }} mm</td>
+                    @else
+                        <td colspan="2">できません</td>
+                    @endif
                 </tr>
                 <tr>
                     <th scope="row">4本組</th>
-                    <td>{{ Form::radio('crossL', 'two', false) }} {{ number_format(session('twoCrossL'), 1) }} mm</td>
-                    <td>{{ Form::radio('crossR', 'two', false) }} {{ number_format(session('twoCrossR'), 1) }} mm</td>
+                    @if (session('hole') >= 16)
+                        <td>{{ Form::radio('crossL', 'two', false) }} {{ number_format(session('twoCrossL'), 1) }} mm</td>
+                        <td>{{ Form::radio('crossR', 'two', false) }} {{ number_format(session('twoCrossR'), 1) }} mm</td>
+                    @else
+                        <td colspan="2">できません</td>
+                    @endif
                 </tr>
                 <tr>
                     <th scope="row">6本組</th>
-                    <td>{{ Form::radio('crossL', 'three', true) }} {{ number_format(session('threeCrossL'), 1) }} mm</td>
-                    <td>{{ Form::radio('crossR', 'three', true) }} {{ number_format(session('threeCrossR'), 1) }} mm</td>
+                    @if (session('hole') >= 24)
+                        <td>{{ Form::radio('crossL', 'three', true) }} {{ number_format(session('threeCrossL'), 1) }} mm</td>
+                        <td>{{ Form::radio('crossR', 'three', true) }} {{ number_format(session('threeCrossR'), 1) }} mm</td>
+                    @else
+                        <td colspan="2">できません</td>
+                    @endif
                 </tr>
                 <tr>
                     <th scope="row">8本組</th>
-                    <td>{{ Form::radio('crossL', 'four', false) }} {{ number_format(session('fourCrossL'), 1)}} mm</td>
-                    <td>{{ Form::radio('crossR', 'four', false) }} {{ number_format(session('fourCrossR'), 1)}} mm</td>
+                    @if (session('hole') >= 32)
+                        <td>{{ Form::radio('crossL', 'four', false) }} {{ number_format(session('fourCrossL'), 1)}} mm</td>
+                        <td>{{ Form::radio('crossR', 'four', false) }} {{ number_format(session('fourCrossR'), 1)}} mm</td>
+                    @else
+                        <td colspan="2">できません</td>
+                    @endif
                 </tr>
             </tbody>
         </table>
@@ -70,7 +91,6 @@
     @auth
         <div class="text-center mb-3">
             {{ Form::submit('マイデータベースに登録', ['class' => 'btn btn-primary']) }}
-            <div class="btn btn-secondary">入力を修正(未実装)</div>
         </div>
         {{ Form::close() }}
     @else

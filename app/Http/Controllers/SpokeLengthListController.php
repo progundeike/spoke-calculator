@@ -22,8 +22,10 @@ class SpokeLengthListController extends Controller
 
     private function getLengthFromCross(string $crossR, string $crossL) : array
     {
-        if($crossR === 'one') {
+        if($crossR === 'radial') {
             $lengthR = session('radialR');
+        } elseif($crossR === 'one') {
+            $lengthR = session('oneCrossR');
         } elseif($crossR === 'two') {
             $lengthR = session('twoCrossR');
         } elseif($crossR === 'three') {
@@ -32,8 +34,10 @@ class SpokeLengthListController extends Controller
             $lengthR = session('fourCrossR');
         }
 
-        if($crossL === 'one') {
+        if($crossL === 'radial') {
             $lengthL = session('radialL');
+        } elseif($crossR === 'one') {
+            $lengthL = session('oneCrossL');
         } elseif($crossL === 'two') {
             $lengthL = session('twoCrossL');
         } elseif($crossL === 'three') {

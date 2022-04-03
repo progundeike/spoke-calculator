@@ -12,9 +12,12 @@ class CalcController extends Controller
     private $erd;
     private $hole;
     private $pcd;
+    private $pcdR;
+    private $pcdL;
     private $flangeDistance;
     private $nippleHoleGap = 0;
     const RADIAL = 1;
+    const ONE_CROSS = 2;
     const TWO_CROSS = 4;
     const THREE_CROSS = 6;
     const FOUR_CROSS = 8;
@@ -50,6 +53,8 @@ class CalcController extends Controller
         $this->hole = (int) $request->hole;
         $this->rimOffset = (float) $request->rimOffset;
         $this->pcd = ['R' => (float) $request->pcdR, 'L' => (float) $request->pcdL];
+        $this->pcdR = (float) $request->pcdR;
+
         $this->flangeDistance = [
             'R' => (float) $request->centerFlangeR - $request->rimOffset,
             'L' => (float) $request->centerFlangeL + $request->rimOffset,
@@ -57,6 +62,8 @@ class CalcController extends Controller
 
         $radialR = $this->getSpokeLength(self::RADIAL, 'R');
         $radialL = $this->getSpokeLength(self::RADIAL, 'L');
+        $oneCrossR = $this->getSpokeLength(self::ONE_CROSS, 'R');
+        $oneCrossL = $this->getSpokeLength(self::ONE_CROSS, 'L');
         $twoCrossR = $this->getSpokeLength(self::TWO_CROSS, 'R');
         $twoCrossL = $this->getSpokeLength(self::TWO_CROSS, 'L');
         $threeCrossR = $this->getSpokeLength(self::THREE_CROSS, 'R');
@@ -69,21 +76,23 @@ class CalcController extends Controller
 
         //計算後にsessionに入れる
         session([
+            'hole' => $this->hole,
+            //spoke length
             'radialR' => $radialR,
             'radialL' => $radialL,
+            'oneCrossR' => $oneCrossR,
+            'oneCrossL' => $oneCrossL,
             'twoCrossR' => $twoCrossR,
             'twoCrossL' => $twoCrossL,
             'threeCrossR' => $threeCrossR,
             'threeCrossL' => $threeCrossL,
             'fourCrossR' => $fourCrossR,
             'fourCrossL' => $fourCrossL,
-            'hole' => $this->hole,
             //rim
             'rimModel' => $rimModel,
             'erd' => $this->erd,
             'rimOffset' => $request->rimOffset,
             'nippleHoleGap' => $this->nippleHoleGap,
-
             //hub
             'hubModel' => $hubModel,
             'pcdL' => $this->pcd['L'],
