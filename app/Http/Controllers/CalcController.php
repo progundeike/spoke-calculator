@@ -6,29 +6,27 @@ use App\Http\Requests\CalcRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
 class CalcController extends Controller
 {
     private $erd;
     private $hole;
     private $pcd;
-    private $pcdR;
-    private $pcdL;
     private $flangeDistance;
+    private $rimOffset;
     private $nippleHoleGap = 0;
-    const RADIAL = 1;
-    const ONE_CROSS = 2;
-    const TWO_CROSS = 4;
-    const THREE_CROSS = 6;
-    const FOUR_CROSS = 8;
-    const SPOKE_HOLE_DIAMETER = 2.5;
+    private const RADIAL = 1;
+    private const ONE_CROSS = 2;
+    private const TWO_CROSS = 4;
+    private const THREE_CROSS = 6;
+    private const FOUR_CROSS = 8;
+    private const SPOKE_HOLE_DIAMETER = 2.5;
 
     protected $redirectTo = '/';
 
     private function getCorrectionValue(int $cross): float
     {
         $value = (float) 0.7;
-        if($cross === self::RADIAL) {
+        if ($cross === self::RADIAL) {
             $value += 1.2;
         }
         return $value;
@@ -38,9 +36,9 @@ class CalcController extends Controller
     {
         $correctionValue = $this->getCorrectionValue($cross);
         $deg = 360 / $this->hole * $cross;
-        $a = ($this->erd / 2) ** 2 + ($this->pcd[$side] / 2) ** 2 + $this->flangeDistance[$side] ** 2;
+        $temp = ($this->erd / 2) ** 2 + ($this->pcd[$side] / 2) ** 2 + $this->flangeDistance[$side] ** 2;
         $cos = cos(deg2rad($deg));
-        $square =  $a - 2 * ($this->erd / 2) * ($this->pcd[$side] / 2) * $cos;
+        $square =  $temp - 2 * ($this->erd / 2) * ($this->pcd[$side] / 2) * $cos;
 
         $spokeLength = sqrt($square) - (self::SPOKE_HOLE_DIAMETER / 2) - $correctionValue;
         $spokeLength = round($spokeLength, 1);
@@ -53,11 +51,10 @@ class CalcController extends Controller
         $this->hole = (int) $request->hole;
         $this->rimOffset = (float) $request->rimOffset;
         $this->pcd = ['R' => (float) $request->pcdR, 'L' => (float) $request->pcdL];
-        $this->pcdR = (float) $request->pcdR;
 
         $this->flangeDistance = [
-            'R' => (float) $request->centerFlangeR - $request->rimOffset,
-            'L' => (float) $request->centerFlangeL + $request->rimOffset,
+            'R' => (float) $request->centerFlangeR - $this->rimOffset,
+            'L' => (float) $request->centerFlangeL + $this->rimOffset,
             ];
 
         $radialR = $this->getSpokeLength(self::RADIAL, 'R');
@@ -91,7 +88,7 @@ class CalcController extends Controller
             //rim
             'rimModel' => $rimModel,
             'erd' => $this->erd,
-            'rimOffset' => $request->rimOffset,
+            'rimOffset' => $this->rimOffset,
             'nippleHoleGap' => $this->nippleHoleGap,
             //hub
             'hubModel' => $hubModel,

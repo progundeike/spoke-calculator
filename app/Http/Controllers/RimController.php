@@ -16,16 +16,16 @@ class RimController extends Controller
         return view('rim.index', ['lists' => $lists]);
     }
 
-    static function getMyList()
+    public static function getMyList()
     {
         $rimLists = Rim::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
 
         $lists = [];
-        foreach($rimLists as $rimList) {
+        foreach ($rimLists as $rimList) {
             $lists[$rimList['id']] = $rimList['rimModel'];
         }
 
-        if(!isset($lists)) {
+        if (count($lists) === 0) {
             $lists[] = 'データがありません';
         }
         return $lists;
@@ -36,9 +36,9 @@ class RimController extends Controller
         return view('rim.create');
     }
 
-    public function edit($id)
+    public function edit($rimId)
     {
-        $rimData = Rim::find($id);
+        $rimData = Rim::find($rimId);
         return view('rim.edit', compact('rimData'));
     }
 
@@ -55,9 +55,9 @@ class RimController extends Controller
         return redirect()->route('rim.index');
     }
 
-    public function destroy($id)
+    public function destroy($rimId)
     {
-        $rim = Rim::find($id);
+        $rim = Rim::find($rimId);
         $rim->delete();
         return redirect()->route('rim.index');
     }

@@ -24,7 +24,7 @@
                 {{ Form::label('rimModel', 'リムの名称') }}
                 {{ Form::text('rimModel', old('rimModel'),['class' => 'form-control', 'id' => 'rimModel']) }}
                 <span class="form-text">
-                    リムの名称を登録することで、次回の入力時にマイデータベースから引用できます。
+                    リムの名称を登録すると、次回の入力時にマイデータベースから引用できます。
                 </span>
             </div>
             <div class="mb-3">
@@ -60,7 +60,7 @@
                 {{ Form::label('hubModel', 'ハブの名称') }}
                 {{ Form::text('hubModel', old('hubModel'),['class' => 'form-control', 'id' => 'hubModel']) }}
                 <span class="form-text">
-                    ハブの名称を登録することで、次回の入力時にマイデータベースから引用できます。
+                    ハブの名称を登録すると、次回の入力時にマイデータベースから引用できます。
                 </span>
             </div>
             <div class="mb-3">

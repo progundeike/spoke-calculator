@@ -25,7 +25,7 @@ class RimsRequest extends FormRequest
     public function rules()
     {
         return [
-            'rimModel' => [Rule::unique('rims')->where(function($query) {
+            'rimModel' => [Rule::unique('rims')->where(function ($query) {
                 return $query->where('user_id', $this->user()->id);
             }), 'required', 'string', 'max:100'],
             'erd' => 'required|numeric|min:100|max:1000',

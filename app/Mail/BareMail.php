@@ -9,7 +9,8 @@ use Illuminate\Queue\SerializesModels;
 
 class BareMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use SerializesModels;
+    use Queueable;
 
     /**
      * Create a new message instance.

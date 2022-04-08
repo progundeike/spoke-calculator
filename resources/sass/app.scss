@@ -1,3 +1,15 @@
+//Line-height
+$headings-line-height: 1.5;
+$line-height-base: 1.65;
+
+//Colors
+$gray-dark: #546E7A;
+
+//Border-radius
+$border-radius: 0.125rem;
+$border-radius-lg: 0.125rem;
+$border-radius-sm: 0.125rem;
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -21,4 +33,6 @@
 
 body {
   background-color: white;
+  //letter-spacing: 0.1em;
+  text-align: justify;
 }

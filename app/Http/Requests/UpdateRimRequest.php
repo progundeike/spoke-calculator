@@ -7,9 +7,9 @@ use Illuminate\Foundation\Http\FormRequest;
 class UpdateRimRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Get the validation rules that apply to the request.
      *
-     * @return bool
+     * @return array
      */
     public function rules()
     {
@@ -31,4 +31,5 @@ class UpdateRimRequest extends FormRequest
             'rimOffset' => 'リムオフセット',
             'rimMemo' => 'メモ欄',
         ];
-    }}
+    }
+}

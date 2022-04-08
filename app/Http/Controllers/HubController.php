@@ -35,15 +35,15 @@ class HubController extends Controller
         return redirect()->route('hub.index');
     }
 
-    public function edit($id)
+    public function edit($hubId)
     {
-        $hubData = Hub::find($id);
+        $hubData = Hub::find($hubId);
         return view('hub.edit', compact('hubData'));
     }
 
-    public function destroy($id)
+    public function destroy($hubId)
     {
-        $hub = Hub::find($id);
+        $hub = Hub::find($hubId);
         $hub->delete();
         return redirect()->route('hub.index');
     }
@@ -62,15 +62,15 @@ class HubController extends Controller
         return redirect()->route('hub.index');
     }
 
-    static function getMyList()
+    public static function getMyList()
     {
         $hubLists = Hub::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         $lists = [];
-        foreach($hubLists as $hubList) {
+        foreach ($hubLists as $hubList) {
             $lists[$hubList['id']] = $hubList['hubModel'];
         }
 
-        if(!isset($lists)) {
+        if (count($lists) === 0) {
             $lists[] = 'データがありません';
         }
         return $lists;
@@ -82,7 +82,7 @@ class HubController extends Controller
 
         return [
             'centerFlangeR' => $hub->centerFlangeR,
-            'centerFlangeR' => $hub->centerFlangeL,
+            'centerFlangeL' => $hub->centerFlangeL,
             'pcdR' => $hub->pcdR,
             'pcdL' => $hub->pcdL,
         ];

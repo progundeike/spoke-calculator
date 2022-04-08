@@ -15,7 +15,7 @@ class InquiryController extends Controller
         return view('inquiry');
     }
 
-    public function sendInquiry (Request $request)
+    public function sendInquiry(Request $request)
     {
         $data = $request->validate([
             'inquiryName' => 'required|string|max:50',

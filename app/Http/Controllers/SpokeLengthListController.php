@@ -20,33 +20,33 @@ class SpokeLengthListController extends Controller
         return view('wheel.index', ['lists' => $lists]);
     }
 
-    private function getLengthFromCross(string $crossR, string $crossL) : array
+    private function getLengthFromCross(string $crossR, string $crossL): array
     {
-        if($crossR === 'radial') {
+        if ($crossR === 'radial') {
             $lengthR = session('radialR');
-        } elseif($crossR === 'one') {
+        } elseif ($crossR === 'one') {
             $lengthR = session('oneCrossR');
-        } elseif($crossR === 'two') {
+        } elseif ($crossR === 'two') {
             $lengthR = session('twoCrossR');
-        } elseif($crossR === 'three') {
+        } elseif ($crossR === 'three') {
             $lengthR = session('threeCrossR');
-        } elseif($crossR === 'four') {
+        } else {
             $lengthR = session('fourCrossR');
         }
 
-        if($crossL === 'radial') {
+        if ($crossL === 'radial') {
             $lengthL = session('radialL');
-        } elseif($crossR === 'one') {
+        } elseif ($crossR === 'one') {
             $lengthL = session('oneCrossL');
-        } elseif($crossL === 'two') {
+        } elseif ($crossL === 'two') {
             $lengthL = session('twoCrossL');
-        } elseif($crossL === 'three') {
+        } elseif ($crossL === 'three') {
             $lengthL = session('threeCrossL');
-        } elseif($crossL === 'four') {
+        } else {
             $lengthL = session('fourCrossL');
         }
 
-        return ['R' => $lengthR, 'L' =>$lengthL];
+        return ['R' => $lengthR, 'L' => $lengthL];
     }
 
     public function store(SpokeLengthListRequest $request, SpokeLengthList $list, Hub $hubList, Rim $rimList)
@@ -79,16 +79,16 @@ class SpokeLengthListController extends Controller
         return redirect()->route('wheel.index');
     }
 
-    public function destroy($id)
+    public function destroy($wheelId)
     {
-        $wheel = SpokeLengthList::find($id);
+        $wheel = SpokeLengthList::find($wheelId);
         $wheel->delete();
         return redirect()->route('wheel.index');
     }
 
-    public function edit($id)
+    public function edit($wheelId)
     {
-        $wheel = SpokeLengthList::find($id);
+        $wheel = SpokeLengthList::find($wheelId);
         return view('wheel.edit', compact('wheel'));
     }
 

@@ -25,7 +25,7 @@ class HubsRequest extends FormRequest
     public function rules()
     {
         return [
-            'hubModel' => [Rule::unique('hubs')->where(function($query) {
+            'hubModel' => [Rule::unique('hubs')->where(function ($query) {
                 return $query->where('user_id', $this->user()->id);
             }), 'required', 'string', 'max:100'],
             'hole' => 'required|numeric|min:4|max:200',
