@@ -1,0 +1,14 @@
+version: 2.1
+	
+
+jobs:
+
+  build:
+    # CircleCIの処理は、Dockerコンテナ上で処理される
+    # Dockerイメージはimageで指定する
+    docker:
+      - image: circleci/php:7.1-node-browsers
+
+		# jobにstepsを追加する
+		steps:
+      - run: echo "Hello World"

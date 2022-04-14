@@ -1,8 +1,20 @@
 version: 2.1
 
+#オーブを使用してシンプルな構成にする
+orbs:
+  heroku: circleci/heroku@1.2.6
+
+workflows:
+  heroku_deploy:
+    jobs:
+    - deploy
+
 jobs:
-  build:
-    docker:
-      - image: circleci/php:7.1-node-browsers
+  deploy:
+    executor: heroku/default
     steps:
-      - run: echo "Hello World"
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git
+        #mainブランチにpushされた時のみherokuにデプロイ
+        only-branch: main
