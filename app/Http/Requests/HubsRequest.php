@@ -29,8 +29,8 @@ class HubsRequest extends FormRequest
                 return $query->where('user_id', $this->user()->id);
             }), 'required', 'string', 'max:100'],
             'hole' => 'required|numeric|min:4|max:200',
-            'pcdR' => 'required|numeric|min:0|max:100',
-            'pcdL' => 'required|numeric|min:0|max:100',
+            'pcdR' => 'required|numeric|min:0|max:500',
+            'pcdL' => 'required|numeric|min:0|max:500',
             'centerFlangeR' => 'required|numeric|min:0|max:100',
             'centerFlangeL' => 'required|numeric|min:0|max:100',
             'hubMemo' => 'nullable|string|max:100',
