@@ -16,5 +16,5 @@ jobs:
       - checkout
       - heroku/install
       - heroku/deploy-via-git
-        #mainブランチにpushされた時のみherokuにデプロイ
-        only-branch: main
+      - heroku/deploy-via-git: # Deploys branch to Heroku via git push.
+          only-branch: main
