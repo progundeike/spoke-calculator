@@ -4,13 +4,28 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@1.2.6
 
+jobs:
+  deploy:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git
+  build:
+    docker: # circleci上でのdockerによる実行環境の指定
+      - image: circleci/php:7.1-node-browsers
+    steps:
+      - checkout
+
 workflows:
+  version: 2.1
+  #workflow名
   heroku_deploy:
     jobs:
       - build
-      - deploy
-      - heroku/deploy-via-git:
+      - deploy:
           requires:
+          #buildが成功したら実行する
             - build
           filters:
             branches:
