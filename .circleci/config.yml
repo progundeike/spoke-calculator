@@ -17,4 +17,5 @@ jobs:
       - heroku/install
       - heroku/deploy-via-git
       - heroku/deploy-via-git: # Deploys branch to Heroku via git push.
-          only-branch: main
+        only:
+          - main
