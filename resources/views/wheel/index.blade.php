@@ -14,10 +14,22 @@
     @foreach($lists as $list)
     <div class="card m-3">
             <div class="card-body">
-                <div>リム: {{ $list->rimModel }}</div>
-                <div>ハブ: {{ $list->hubModel }}</div>
+                <div>リム: {{ $list->rimModel }} ({{ $list->hole }}H)</div>
+                <div>ハブ: {{ $list->hubModel }} ({{ $list->hole }}H)</div>
                 スポーク長<br>
-                ドライブサイド: {{ $list->lengthR }}mm、ノンドライブサイド: {{ $list->lengthL }}mm
+                @if ($list->crossR === $list->crossL)
+                    組み方:{{ $list->crossR}} <br>
+                @endif
+                ドライブサイド: {{ $list->lengthR }}mm
+                    @if ($list->crossR !== $list->crossL)
+                        ({{ $list->crossR }})
+                    @endif
+                <br>
+                ノンドライブサイド: {{ $list->lengthL }}mm
+                    @if ($list->crossR !== $list->crossL)
+                    ({{ $list->crossL }})
+                    @endif
+                <br>
                 <div class="mb-1">
                 メモ欄:
                 @if(isset($list->wheelMemo))

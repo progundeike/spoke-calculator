@@ -17,6 +17,7 @@ class SpokeLengthList extends Model
         'lengthL',
         'hubModel',
         'rimModel',
+        'hole',
         'wheelMemo',
     ];
 

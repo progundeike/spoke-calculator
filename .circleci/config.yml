@@ -12,20 +12,19 @@ jobs:
       - heroku/install
       - heroku/deploy-via-git
   build:
-    docker: # circleci上でのdockerによる実行環境の指定
+    docker:
       - image: circleci/php:7.1-node-browsers
     steps:
       - checkout
 
 workflows:
   version: 2.1
-  #workflow名
   heroku_deploy:
     jobs:
       - build
       - deploy:
           requires:
-          #buildが成功したら実行する
+          # ビルドジョブが完了した場合にのみ、デプロイを実行
             - build
           filters:
             branches:

@@ -25,8 +25,8 @@ class SpokeLengthListRequest extends FormRequest
     public function rules()
     {
         return [
-            'crossR' => 'string|max:5',
-            'crossL' => 'string|max:5',
+            'crossR' => 'string|max:10',
+            'crossL' => 'string|max:10',
             'wheelMemo' => 'nullable|string|max:200',
         ];
     }

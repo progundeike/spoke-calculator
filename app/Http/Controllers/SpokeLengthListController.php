@@ -54,6 +54,7 @@ class SpokeLengthListController extends Controller
         $list->user_id = $hubList->user_id = $rimList->user_id = $request->user()->id;
         $list->hubModel = $hubList->hubModel = session('hubModel');
         $list->rimModel = $rimList->rimModel = session('rimModel');
+        $list->hole = $hubList->hole = $rimList->hole = session('hole');
         $list->crossR = $request->crossR;
         $list->crossL = $request->crossL;
 
@@ -62,7 +63,6 @@ class SpokeLengthListController extends Controller
         $list->lengthL = $length['L'];
         $list->wheelMemo = $request->wheelMemo;
 
-        $hubList->hole = $rimList->hole = session('hole');
         $hubList->centerFlangeR = session('centerFlangeR');
         $hubList->centerFlangeL = session('centerFlangeL');
         $hubList->pcdR = session('pcdR');
