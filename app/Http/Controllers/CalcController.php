@@ -45,22 +45,22 @@ class CalcController extends Controller
         return $spokeLength;
     }
 
-    private function getDifferenceTension(): float
-    {
-        //垂直方向の長さ
-        $resultantPcdR = $this->pcd['R'] * cos(deg2rad((360 / ($this->hole) / 4)));
-        $resultantPcdL = $this->pcd['L'] * cos(deg2rad((360 / ($this->hole) / 4)));
-        $xR = ($this->erd / 2) - $resultantPcdR;
-        $xL = ($this->erd / 2) - $resultantPcdL;
+    // private function getDifferenceTension(): float
+    // {
+    //     //垂直方向の長さ
+    //     $resultantPcdR = $this->pcd['R'] * cos(deg2rad((360 / ($this->hole) / 4)));
+    //     $resultantPcdL = $this->pcd['L'] * cos(deg2rad((360 / ($this->hole) / 4)));
+    //     $xR = ($this->erd / 2) - $resultantPcdR;
+    //     $xL = ($this->erd / 2) - $resultantPcdL;
 
-        //水平方向の長さ
-        $yR = $this->flangeDistance['R'] - ($this->nippleHoleGap / 2) + $this->rimOffset;
-        $yL = $this->flangeDistance['L'] - ($this->nippleHoleGap / 2) - $this->rimOffset;
+    //     //水平方向の長さ
+    //     $yR = $this->flangeDistance['R'] - ($this->nippleHoleGap / 2) + $this->rimOffset;
+    //     $yL = $this->flangeDistance['L'] - ($this->nippleHoleGap / 2) - $this->rimOffset;
 
-        //
+    //     //
 
-        return $LRratio;
-    }
+    //     //return $LRratio;
+    // }
 
     public function calc(CalcRequest $request)
     {
