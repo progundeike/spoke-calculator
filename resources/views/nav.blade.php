@@ -4,6 +4,7 @@
 
     <!-- right side menu -->
     <ul class="nav navbar-nav">
+        <a class="nav-link" href="#">パブリックデータベース</a>
         <div class="dropdown">
             @guest
                 <a class="nav-link dropdown-toggle" id="dropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#">
