@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CalcRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\CalcTensionDiffController;
 
 class CalcController extends Controller
 {
@@ -14,12 +15,12 @@ class CalcController extends Controller
     private $flangeDistance;
     private $rimOffset;
     private $nippleHoleGap = 0;
-    private const RADIAL = 1;
-    private const ONE_CROSS = 2;
-    private const TWO_CROSS = 4;
-    private const THREE_CROSS = 6;
-    private const FOUR_CROSS = 8;
-    private const SPOKE_HOLE_DIAMETER = 2.5;
+    public const RADIAL = 1;
+    public const ONE_CROSS = 2;
+    public const TWO_CROSS = 4;
+    public const THREE_CROSS = 6;
+    public const FOUR_CROSS = 8;
+    public const SPOKE_HOLE_DIAMETER = 2.5;
 
     protected $redirectTo = '/';
 
@@ -44,23 +45,6 @@ class CalcController extends Controller
         $spokeLength = round($spokeLength, 1);
         return $spokeLength;
     }
-
-    // private function getDifferenceTension(): float
-    // {
-    //     //垂直方向の長さ
-    //     $resultantPcdR = $this->pcd['R'] * cos(deg2rad((360 / ($this->hole) / 4)));
-    //     $resultantPcdL = $this->pcd['L'] * cos(deg2rad((360 / ($this->hole) / 4)));
-    //     $xR = ($this->erd / 2) - $resultantPcdR;
-    //     $xL = ($this->erd / 2) - $resultantPcdL;
-
-    //     //水平方向の長さ
-    //     $yR = $this->flangeDistance['R'] - ($this->nippleHoleGap / 2) + $this->rimOffset;
-    //     $yL = $this->flangeDistance['L'] - ($this->nippleHoleGap / 2) - $this->rimOffset;
-
-    //     //
-
-    //     //return $LRratio;
-    // }
 
     public function calc(CalcRequest $request)
     {
@@ -114,7 +98,7 @@ class CalcController extends Controller
             'centerFlangeR' => $request->centerFlangeR,
             'centerFlangeL' => $request->centerFlangeL,
         ]);
-
+        
         return view('length');
     }
 }

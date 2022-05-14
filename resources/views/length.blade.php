@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
-    {{ Form::open(['url' => route('wheel.store'), 'method' => 'post']) }}
+    {{ Form::open(['url' => route('wheel.store'), 'method' => 'post', 'id' => 'radio']) }}
     {{ Form::token() }}
     <div class="mt-3 mb-3 text-center">
         <table class="table table-bordered">
@@ -61,6 +61,21 @@
         </table>
     </div>
 
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <h3>スポークテンションの左右差</h3>
+                <div>
+                    ノンドライブサイド(<span id="left">ラジアル組</span>)のスポークテンションは<br>
+                    ドライブサイド(<span id="right">ラジアル組</span>)の
+                    <span class="h4 font-weight-bold text-danger" id="tensionDiff"></span>
+                    <span class="h4 font-weight-bold text-danger">%</span>
+                    です。
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card py-1 mt-3 mb-3">
         <div class="card-body">
             <div class="mb-2">
@@ -97,4 +112,57 @@
         <h5>ユーザー登録をすると、スポーク長の記録や、リム、ハブの情報を次回の計算に使用することができます</h5>
     @endauth
 </div>
+<script>
+    $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
+$("#radio").change(function() {
+    var leftCross = $('input:radio[name="crossL"]:checked').val();
+    var rightCross = $('input:radio[name="crossR"]:checked').val();
+    $('#left').text(leftCross);
+    $('#right').text(rightCross);
+
+    $.ajax({
+        type: "POST",
+        url: "/tensionDiff",
+        data: {
+                "leftCross" : leftCross,
+                "rightCross" : rightCross,
+                },
+        dataType: "json"
+    }).done(function(data) {
+        //成功の処理
+        $('#tensionDiff').text(data);
+    }).fail(function(){
+        //エラーの処理
+        alert('error');
+    });
+});
+
+$(function() {
+    var leftCross = $('input:radio[name="crossL"]:checked').val();
+    var rightCross = $('input:radio[name="crossR"]:checked').val();
+    $('#left').text(leftCross);
+    $('#right').text(rightCross);
+
+    $.ajax({
+        type: "POST",
+        url: "/tensionDiff",
+        data: {
+                "leftCross" : leftCross,
+                "rightCross" : rightCross,
+                },
+        dataType: "json"
+    }).done(function(data) {
+        //成功の処理
+        $('#tensionDiff').text(data);
+    }).fail(function(){
+        //エラーの処理
+        alert('error');
+    });
+});
+</script>
 @endsection

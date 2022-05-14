@@ -32,6 +32,7 @@ Route::post('/hub/input', [App\Http\Controllers\HubController::class, 'inputForm
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
 Route::post('/register/mail', [App\Http\Controllers\Auth\RegisterController::class, 'sendRegisteredMail'])->name('register.mail');
 Route::post('/length', [App\Http\Controllers\CalcController::class, 'calc'])->name('calc');
+Route::post('/tensionDiff', [App\Http\Controllers\CalcTensionDiffController::class, 'calcTensionDiff'])->name('tensionDiff');
 Route::post('/inquiry', [App\Http\Controllers\InquiryController::class, 'sendInquiry']);
 
 Auth::routes();
