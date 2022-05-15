@@ -112,57 +112,5 @@
         <h5>ユーザー登録をすると、スポーク長の記録や、リム、ハブの情報を次回の計算に使用することができます</h5>
     @endauth
 </div>
-<script>
-    $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
-
-$("#radio").change(function() {
-    var leftCross = $('input:radio[name="crossL"]:checked').val();
-    var rightCross = $('input:radio[name="crossR"]:checked').val();
-    $('#left').text(leftCross);
-    $('#right').text(rightCross);
-
-    $.ajax({
-        type: "POST",
-        url: "/tensionDiff",
-        data: {
-                "leftCross" : leftCross,
-                "rightCross" : rightCross,
-                },
-        dataType: "json"
-    }).done(function(data) {
-        //成功の処理
-        $('#tensionDiff').text(data);
-    }).fail(function(){
-        //エラーの処理
-        alert('error');
-    });
-});
-
-$(function() {
-    var leftCross = $('input:radio[name="crossL"]:checked').val();
-    var rightCross = $('input:radio[name="crossR"]:checked').val();
-    $('#left').text(leftCross);
-    $('#right').text(rightCross);
-
-    $.ajax({
-        type: "POST",
-        url: "/tensionDiff",
-        data: {
-                "leftCross" : leftCross,
-                "rightCross" : rightCross,
-                },
-        dataType: "json"
-    }).done(function(data) {
-        //成功の処理
-        $('#tensionDiff').text(data);
-    }).fail(function(){
-        //エラーの処理
-        alert('error');
-    });
-});
-</script>
+<script src="{{ mix('js/calcTensionDiff.js') }}"></script>
 @endsection
