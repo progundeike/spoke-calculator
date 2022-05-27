@@ -3,13 +3,27 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/php:7.3-node-browsers
+      - image: cimg/php:7.4-node
     steps:
       - checkout #githubからCircleCIにgit cloneする
-      - run: sudo composer self-update --1 #エラー回避のためにcomposerをアップデート
+      - restore_cache: #保存されたキャッシュの復元
+          key: composer-v1-{{ checksum "composer.lock" }}
       - run: composer install -n --prefer-dist #composerを使用して,php関連のパッケージをインストール
-      - run: npm ci #npmを使用して、javascript関連のパッケージをインストール
-      - run: npm run dev #javascriptのトランスパイル
+      - save_cache: #キャッシュの保存
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths :
+            - vendor
+      - restore_cache:
+          key: npm-v1-{{ checksum "package-lock.json" }}
       - run:
-        name: php test
-        command: ./vendor/bin/phpunit
+          name: npm ci
+          command: |
+            if [ ! -d node_modules ]; then
+              npm ci
+            fi
+      - save_cache:
+          key: npm-v1-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run: npm run dev #javascriptのトランスパイル
+      - run: ./vendor/bin/phpunit #テストの実行
