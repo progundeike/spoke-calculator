@@ -10,4 +10,4 @@ jobs:
       - run: composer install -n --prefer-dist #composerを使用して,php関連のパッケージをインストール
       - run: npm ci #npmを使用して、javascript関連のパッケージをインストール
       - run: npm run dev #javascriptのトランスパイル
-      - run: ./vendor/bin/phpunit
+      - run: ./vendor/bin/phpunit #syntaxエラーの修正
