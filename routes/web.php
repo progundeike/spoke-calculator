@@ -13,12 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('input');
-})->name('input');
-Route::get('/inquiry', function () {
-    return view('inquiry');
-})->name('inquiry');
+Route::view('/', 'input')->name('input');
+Route::view('/inquiry', 'inquiry')->name('inquiry');
+Route::view('/account', 'account')->middleware('auth')->name('account');
 
 Route::resource('/wheel', App\Http\Controllers\SpokeLengthListController::class)
     ->only('index', 'create', 'store', 'edit', 'destroy', 'update')->middleware('auth');

@@ -23,6 +23,7 @@
                     <li><a href="{{route('wheel.index')}}" class="dropdown-item">マイホイールデータ</a></li>
                     <li><a href="{{route('hub.index')}}" class="dropdown-item">マイハブデータ</a></li>
                     <li><a href="{{route('rim.index')}}" class="dropdown-item">マイリムデータ</a></li>
+                    <li><a href="{{route('account')}}" class="dropdown-item">アカウント管理</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
