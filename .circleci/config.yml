@@ -3,10 +3,10 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/php:7.3-node-browsers
+      - image: cimg/php:7.4
     steps:
       - checkout #githubからCircleCIにgit cloneする
-      - run: sudo composer self-update --2 #エラー回避のためにcomposerをアップデート
+#      - run: sudo composer self-update --2 #エラー回避のためにcomposerをアップデート
       - run: composer install -n --prefer-dist #composerを使用して,php関連のパッケージをインストール
       - run: npm ci #npmを使用して、javascript関連のパッケージをインストール
       - run: npm run dev #javascriptのトランスパイル
