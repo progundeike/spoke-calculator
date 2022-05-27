@@ -6,8 +6,13 @@ jobs:
       - image: cimg/php:7.4-node
     steps:
       - checkout #githubからCircleCIにgit cloneする
-#      - run: sudo composer self-update --2 #エラー回避のためにcomposerをアップデート
+      - restore_cache: #保存されたキャッシュの復元
+          key: composer-v1-{{ checksum "composer.lock" }}
       - run: composer install -n --prefer-dist #composerを使用して,php関連のパッケージをインストール
+      - save_cache: #キャッシュの保存
+          key: composer-v1-{{ checksum "composer.lock" }}
+          pathes :
+            - vendor
       - run: npm ci #npmを使用して、javascript関連のパッケージをインストール
       - run: npm run dev #javascriptのトランスパイル
-      - run: ./vendor/bin/phpunit #syntaxエラーの修正
+      - run: ./vendor/bin/phpunit #テストの実行
